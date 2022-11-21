@@ -1,36 +1,28 @@
 package com.chilikinow.lesson5;
 
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
+import com.chilikinow.lesson5.pages.components.Gender;
+import com.chilikinow.lesson5.pages.components.Hobby;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class Homework{
-
-    private String text;
-
-    @BeforeAll
-    static void init(){
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-        Configuration.holdBrowserOpen = true;
-    }
+public class WebPageTest extends TestBase{
 
     @Test
-    void formTests(){
-        open("/automation-practice-form");
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("$('#fixedban').remove()");
+    void positiveRegistrationFormTest(){
 
-        $("#firstName").setValue("Mike");
-        $("#lastName").setValue("Turilov");
-        $("#userEmail").setValue("example@google.com");
-        $("#gender-radio-1").doubleClick();
-        $("#userNumber").setValue("9001546995");
+        registrationPage.openPage("/automation-practice-form")
+            .setFIrstName("Mike")
+            .setLastName("Turilov")
+            .setEmail("example@google.com")
+            .chooseGender(Gender.Male)
+            .setPhoneNumber("9001546995")
+            .setSubject("Maths")
+            .chooseHobby(Hobby.Sports)
+            .uploadPicture("jpg/photo_2022-11-18_20-47-02.jpg")
+            .setAddress("Some Address");
+
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").click();
         $(".react-datepicker__month-select").selectOption("January");
@@ -38,18 +30,14 @@ public class Homework{
         $(".react-datepicker__year-select").selectOption("1985");
         $(".react-datepicker__year-select").click();
         $(".react-datepicker__day--012").click();
-        $("#subjectsInput").click();
-        $("#subjectsInput").setValue("Maths");
-        $("#subjectsInput").pressEnter();
-        $("#subjectsInput").pressTab();
-        $("#hobbies-checkbox-1").parent().click();
-        $("#uploadPicture").uploadFromClasspath("jpg/photo_2022-11-18_20-47-02.jpg");
-        $("#currentAddress").setValue("Some Address");
+
         $("#state").click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
+
         $("#city").click();
         $("#stateCity-wrapper").$(byText("Delhi")).click();
-        $("#submit").click();
+
+
 
 //        $(".modal-content").shouldBe(Condition.visible);
 //        $(".modal-content").shouldHave(text("Mike Turilov"));

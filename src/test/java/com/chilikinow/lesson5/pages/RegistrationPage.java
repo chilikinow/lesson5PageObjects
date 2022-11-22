@@ -1,12 +1,19 @@
 package com.chilikinow.lesson5.pages;
 
-import com.chilikinow.lesson5.pages.components.Gender;
-import com.chilikinow.lesson5.pages.components.Hobby;
+import com.chilikinow.lesson5.DateOfBirth;
+import com.chilikinow.lesson5.Gender;
+import com.chilikinow.lesson5.Hobby;
 import com.codeborne.selenide.SelenideElement;
-import com.sun.tools.javac.jvm.Gen;
+import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
+@Slf4j
 public class RegistrationPage {
 
     private final SelenideElement
@@ -19,8 +26,6 @@ public class RegistrationPage {
     private final SelenideElement addressInput = $("#currentAddress");
     private final SelenideElement submitButton = $("#submit");
 
-
-
     public RegistrationPage openPage(String url){
         open(url);
         executeJavaScript("$('footer').remove()");
@@ -28,7 +33,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setFIrstName(String value){
+    public RegistrationPage setFirstName(String value){
         firstNameInput.setValue(value);
         return this;
     }
@@ -77,10 +82,10 @@ public class RegistrationPage {
             case Sports:
                 $("#hobbies-checkbox-1").parent().click();
                 break;
-            case Music:
+            case Reading:
                 $("#hobbies-checkbox-2").parent().click();
                 break;
-            case Reading:
+            case Music:
                 $("#hobbies-checkbox-3").parent().click();
                 break;
         }
@@ -88,13 +93,43 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage uploadPicture(String classPath){
-        uploadPicture.uploadFromClasspath(classPath);
+    public RegistrationPage uploadPicture(File file){
+        uploadPicture.uploadFile(file);
         return this;
     }
 
     public RegistrationPage setAddress(String value){
         addressInput.setValue(value);
+        return this;
+    }
+
+    public RegistrationPage setState(String state){
+        $("#state").click();
+        $("#stateCity-wrapper").$(byText(state)).click();
+        return this;
+    }
+
+    public RegistrationPage setCity(String city){
+        $("#city").click();
+        $("#stateCity-wrapper").$(byText(city)).click();
+        return this;
+    }
+
+    public RegistrationPage setDateOfBirth(DateOfBirth dateOfBirth){
+
+        String day = String.valueOf(dateOfBirth.getLocalDate().getDayOfMonth());
+        String month = dateOfBirth.getMonthStartToUppercase();
+        String year = String.valueOf(dateOfBirth.getLocalDate().getYear());
+
+        log.info("day: {}, month: {}, year: {}", day, month, year);
+
+        $("#dateOfBirthInput").click();
+        $(".react-datepicker__month-select").click();
+        $(".react-datepicker__month-select").selectOption(month);
+        $(".react-datepicker__year-select").click();
+        $(".react-datepicker__year-select").selectOption(year);
+        $(".react-datepicker__year-select").click();
+        $(".react-datepicker__day--0" + day).click();
         return this;
     }
 

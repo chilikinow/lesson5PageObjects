@@ -10,7 +10,7 @@ import java.util.Locale;
 
 public class TestBase {
 
-    public static Student student = new Student();
+    public Student student = new Student();
     public RegistrationPage registrationPage = new RegistrationPage();
     public Faker faker = new Faker(new Locale("en-US"));
     public static final SimpleDateFormat sdfBirthdayFaker = new SimpleDateFormat("dd.MM.yyyy");

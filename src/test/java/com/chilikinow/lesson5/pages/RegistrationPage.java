@@ -129,7 +129,7 @@ public class RegistrationPage {
         $(".react-datepicker__year-select").click();
         $(".react-datepicker__year-select").selectOption(year);
         $(".react-datepicker__year-select").click();
-        $(".react-datepicker__day--0" + day).click();
+        $(".react-datepicker__day--0" + day).click(); //todo
         return this;
     }
 

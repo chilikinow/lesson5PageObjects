@@ -19,7 +19,7 @@ public enum Hobby {
         return this.title;
     }
 
-    public static Hobby randomDirection()  {
+    public static Hobby randomHobby()  {
         Hobby[] directions = values();
         return directions[RANDOM_VALUE.nextInt(directions.length)];
     }

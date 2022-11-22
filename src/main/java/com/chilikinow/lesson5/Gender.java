@@ -19,7 +19,7 @@ public enum Gender {
         return title;
     }
 
-    public static Gender randomDirection()  {
+    public static Gender randomGender()  {
         Gender[] directions = values();
         return directions[RANDOM_VALUE.nextInt(directions.length)];
     }

@@ -5,11 +5,7 @@ import com.chilikinow.lesson5.Gender;
 import com.chilikinow.lesson5.Hobby;
 import com.codeborne.selenide.SelenideElement;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.File;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 

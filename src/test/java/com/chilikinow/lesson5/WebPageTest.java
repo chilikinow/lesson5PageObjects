@@ -28,7 +28,6 @@ public class WebPageTest extends TestBase {
         DateOfBirth dateOfBirth = new DateOfBirth(sdfBirthdayFaker.format(faker.date().birthday()));
         File picture = new File("src/main/resources/jpg/photo_2022-11-18_20-47-02.jpg");
 
-
          student = Student.builder()
                             .firstName(firstName)
                             .lastName(lastName)
@@ -86,7 +85,6 @@ public class WebPageTest extends TestBase {
         $(".modal-content").shouldHave(text(student.getAddress()));
         $(".modal-content").shouldHave(text(student.getState() + " " + student.getCity()));
         $("#closeLargeModal").click();
-
 
     }
 }

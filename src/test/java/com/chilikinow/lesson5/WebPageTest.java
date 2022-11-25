@@ -14,19 +14,34 @@ public class WebPageTest extends TestBase {
     @BeforeEach
     void BeforeEach() {
 
+        String firstName = faker.name().firstName(),
+                lastName = faker.name().lastName(),
+                email = faker.internet().emailAddress(),
+                phoneNumber = faker.phoneNumber().subscriberNumber(10),
+                address = faker.address().fullAddress(),
+                subject = "Maths",
+                state = "NCR",
+                city = "Delhi";
+
+        Gender gender = Gender.randomGender();
+        Hobby hobby = Hobby.randomHobby();
+        DateOfBirth dateOfBirth = new DateOfBirth(sdfBirthdayFaker.format(faker.date().birthday()));
+        File picture = new File("src/main/resources/jpg/photo_2022-11-18_20-47-02.jpg");
+
+
          student = Student.builder()
-                            .firstName(faker.name().firstName())
-                            .lastName(faker.name().lastName())
-                            .email(faker.internet().emailAddress())
-                            .phoneNumber(faker.phoneNumber().subscriberNumber(10))
-                            .gender(Gender.randomGender())
-                            .address(faker.address().fullAddress())
-                            .subject("Maths")
-                            .hobby(Hobby.randomHobby())
-                            .dateOfBirth(new DateOfBirth(sdfBirthdayFaker.format(faker.date().birthday())))
-                            .picture(new File("src/main/resources/jpg/photo_2022-11-18_20-47-02.jpg"))
-                            .state("NCR")
-                            .city("Delhi")
+                            .firstName(firstName)
+                            .lastName(lastName)
+                            .email(email)
+                            .phoneNumber(phoneNumber)
+                            .gender(gender)
+                            .address(address)
+                            .subject(subject)
+                            .hobby(hobby)
+                            .dateOfBirth(dateOfBirth)
+                            .picture(picture)
+                            .state(state)
+                            .city(city)
                             .build();
     }
 

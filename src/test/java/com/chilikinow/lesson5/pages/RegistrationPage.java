@@ -104,7 +104,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setState(String state){
-        $("#state").click();
+        $("#state").scrollTo().click();
         $("#stateCity-wrapper").$(byText(state)).click();
         return this;
     }
@@ -117,19 +117,16 @@ public class RegistrationPage {
 
     public RegistrationPage setDateOfBirth(DateOfBirth dateOfBirth){
 
-        String day = String.valueOf(dateOfBirth.getLocalDate().getDayOfMonth());
+        String day = dateOfBirth.getDayByTwoCharString();
         String month = dateOfBirth.getMonthStartToUppercase();
         String year = String.valueOf(dateOfBirth.getLocalDate().getYear());
 
         log.info("day: {}, month: {}, year: {}", day, month, year);
 
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").click();
         $(".react-datepicker__month-select").selectOption(month);
-        $(".react-datepicker__year-select").click();
         $(".react-datepicker__year-select").selectOption(year);
-        $(".react-datepicker__year-select").click();
-        $(".react-datepicker__day--0" + day).click(); //todo
+        $(".react-datepicker__day--0" + day + ":not(.react-datepicker__day--outside-month)").click();
         return this;
     }
 

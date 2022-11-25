@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
 
 public class WebPageTest extends TestBase {
 
@@ -28,20 +27,20 @@ public class WebPageTest extends TestBase {
         DateOfBirth dateOfBirth = new DateOfBirth(sdfBirthdayFaker.format(faker.date().birthday()));
         File picture = new File("src/main/resources/jpg/photo_2022-11-18_20-47-02.jpg");
 
-         student = Student.builder()
-                            .firstName(firstName)
-                            .lastName(lastName)
-                            .email(email)
-                            .phoneNumber(phoneNumber)
-                            .gender(gender)
-                            .address(address)
-                            .subject(subject)
-                            .hobby(hobby)
-                            .dateOfBirth(dateOfBirth)
-                            .picture(picture)
-                            .state(state)
-                            .city(city)
-                            .build();
+        student = Student.builder()
+                        .firstName(firstName)
+                        .lastName(lastName)
+                        .email(email)
+                        .phoneNumber(phoneNumber)
+                        .gender(gender)
+                        .address(address)
+                        .subject(subject)
+                        .hobby(hobby)
+                        .dateOfBirth(dateOfBirth)
+                        .picture(picture)
+                        .state(state)
+                        .city(city)
+                        .build();
     }
 
     @Test
@@ -62,15 +61,15 @@ public class WebPageTest extends TestBase {
             .setDateOfBirth(student.getDateOfBirth())
             .submit();
 
-        $(".modal-dialog").should(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        registrationPage.getModal().getDialog().should(appear);
+        registrationPage.getModal().getDialogTitle().shouldHave(text("Thanks for submitting the form"));
 
-        $(".modal-content").shouldBe(Condition.visible);
-        $(".modal-content").shouldHave(text(student.getFirstName() + " " + student.getLastName()));
-        $(".modal-content").shouldHave(text(student.getEmail()));
-        $(".modal-content").shouldHave(text(student.getGender().toString()));
-        $(".modal-content").shouldHave(text(student.getPhoneNumber()));
-        $(".modal-content").shouldHave(text(
+        registrationPage.getModal().getContent().shouldBe(Condition.visible);
+        registrationPage.getModal().getContent().shouldHave(text(student.getFirstName() + " " + student.getLastName()));
+        registrationPage.getModal().getContent().shouldHave(text(student.getEmail()));
+        registrationPage.getModal().getContent().shouldHave(text(student.getGender().toString()));
+        registrationPage.getModal().getContent().shouldHave(text(student.getPhoneNumber()));
+        registrationPage.getModal().getContent().shouldHave(text(
 
                 student.getDateOfBirth().getLocalDate().getDayOfMonth()
                 + " "
@@ -79,12 +78,12 @@ public class WebPageTest extends TestBase {
                 + student.getDateOfBirth().getLocalDate().getYear()
 
         ));
-        $(".modal-content").shouldHave(text(student.getSubject()));
-        $(".modal-content").shouldHave(text(student.getHobby().toString()));
-        $(".modal-content").shouldHave(text(student.getPicture().getName()));
-        $(".modal-content").shouldHave(text(student.getAddress()));
-        $(".modal-content").shouldHave(text(student.getState() + " " + student.getCity()));
-        $("#closeLargeModal").click();
+        registrationPage.getModal().getContent().shouldHave(text(student.getSubject()));
+        registrationPage.getModal().getContent().shouldHave(text(student.getHobby().toString()));
+        registrationPage.getModal().getContent().shouldHave(text(student.getPicture().getName()));
+        registrationPage.getModal().getContent().shouldHave(text(student.getAddress()));
+        registrationPage.getModal().getContent().shouldHave(text(student.getState() + " " + student.getCity()));
+        registrationPage.getModal().close();
 
     }
 }

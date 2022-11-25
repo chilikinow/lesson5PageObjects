@@ -3,7 +3,9 @@ package com.chilikinow.lesson5.pages;
 import com.chilikinow.lesson5.DateOfBirth;
 import com.chilikinow.lesson5.Gender;
 import com.chilikinow.lesson5.Hobby;
+import com.chilikinow.lesson5.pages.components.Modal;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 import static com.codeborne.selenide.Selectors.byText;
@@ -12,15 +14,25 @@ import static com.codeborne.selenide.Selenide.*;
 @Slf4j
 public class RegistrationPage {
 
-    private final SelenideElement
-    firstNameInput = $("#firstName");
-    private final SelenideElement lastNameInput = $("#lastName");
-    private final SelenideElement emailInput = $("#userEmail");
-    private final SelenideElement phoneNumberInput = $("#userNumber");
-    private final SelenideElement subjectsInput = $("#subjectsInput");
-    private final SelenideElement uploadPicture = $("#uploadPicture");
-    private final SelenideElement addressInput = $("#currentAddress");
-    private final SelenideElement submitButton = $("#submit");
+    @Getter
+    private Modal modal;
+
+    {
+        modal = Modal.builder()
+                    .dialog($(".modal-dialog"))
+                    .dialogTitle($("#example-modal-sizes-title-lg"))
+                    .content($(".modal-content"))
+                    .build();
+    }
+
+    private final SelenideElement firstNameInput = $("#firstName"),
+                                    lastNameInput = $("#lastName"),
+                                    emailInput = $("#userEmail"),
+                                    phoneNumberInput = $("#userNumber"),
+                                    subjectsInput = $("#subjectsInput"),
+                                    uploadPicture = $("#uploadPicture"),
+                                    addressInput = $("#currentAddress"),
+                                    submitButton = $("#submit");
 
     public RegistrationPage openPage(String url){
         open(url);

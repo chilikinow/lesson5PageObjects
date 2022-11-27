@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.text;
 public class WebPageTest extends TestBase {
 
     @BeforeEach
-    void BeforeEach() {
+    void beforeEach() {
 
         String firstName = faker.name().firstName(),
                 lastName = faker.name().lastName(),

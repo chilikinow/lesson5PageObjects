@@ -18,7 +18,7 @@ public class WebPageTest extends TestBase {
                 email = faker.internet().emailAddress(),
                 phoneNumber = faker.phoneNumber().subscriberNumber(10),
                 address = faker.address().fullAddress(),
-                subject = "Mathsss",
+                subject = "Maths",
                 state = "NCR",
                 city = "Delhi";
 

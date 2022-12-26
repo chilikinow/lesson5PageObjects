@@ -5,6 +5,7 @@ import com.chilikinow.lesson5.Gender;
 import com.chilikinow.lesson5.Hobby;
 import com.chilikinow.lesson5.pages.components.Modal;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import java.io.File;
@@ -34,6 +35,7 @@ public class RegistrationPage {
                                     addressInput = $("#currentAddress"),
                                     submitButton = $("#submit");
 
+    @Step("Открываем страницу")
     public RegistrationPage openPage(String url){
         open(url);
         executeJavaScript("$('footer').remove()");
@@ -41,21 +43,25 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Вводим Имя")
     public RegistrationPage setFirstName(String value){
         firstNameInput.setValue(value);
         return this;
     }
 
+    @Step("Вводим Фамилию")
     public RegistrationPage setLastName(String value){
         lastNameInput.setValue(value);
         return this;
     }
 
+    @Step("Вводим электронную почту")
     public RegistrationPage setEmail(String value){
         emailInput.setValue(value);
         return this;
     }
 
+    @Step("Выбираем пол")
     public RegistrationPage chooseGender(Gender gender){
         switch (gender){
             case Male:
@@ -72,11 +78,13 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Вводим номер телефона")
     public RegistrationPage setPhoneNumber(String value){
         phoneNumberInput.setValue(value);
         return this;
     }
 
+    @Step("Вводим субъект")
     public RegistrationPage setSubject(String value){
         subjectsInput.click();
         subjectsInput.setValue(value);
@@ -85,7 +93,8 @@ public class RegistrationPage {
         return this;
     }
 
-     public RegistrationPage chooseHobby(Hobby hobby){
+    @Step("Выбираем хобби")
+    public RegistrationPage chooseHobby(Hobby hobby){
         switch (hobby){
             case Sports:
                 $("#hobbies-checkbox-1").parent().click();
@@ -101,28 +110,33 @@ public class RegistrationPage {
         return this;
     }
 
+    @Step("Загружаем фото")
     public RegistrationPage uploadPicture(File file){
         uploadPicture.uploadFile(file);
         return this;
     }
 
+    @Step("Вводим адрес")
     public RegistrationPage setAddress(String value){
         addressInput.setValue(value);
         return this;
     }
 
+    @Step("Выбираем штат")
     public RegistrationPage setState(String state){
         $("#state").scrollTo().click();
         $("#stateCity-wrapper").$(byText(state)).click();
         return this;
     }
 
+    @Step("Выбираем город")
     public RegistrationPage setCity(String city){
         $("#city").click();
         $("#stateCity-wrapper").$(byText(city)).click();
         return this;
     }
 
+    @Step("Вводим дату рождения")
     public RegistrationPage setDateOfBirth(DateOfBirth dateOfBirth){
 
         String day = dateOfBirth.getDayByTwoCharString();

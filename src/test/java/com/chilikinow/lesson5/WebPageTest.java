@@ -2,12 +2,23 @@ package com.chilikinow.lesson5;
 
 import com.chilikinow.lesson5.pages.TestBase;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.selenide.AllureSelenide;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import java.io.File;
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.text;
 
+@Slf4j
+@Tag("web_page")
+@DisplayName("check web page https://demoqa.com/automation-practice-form")
 public class WebPageTest extends TestBase {
 
     @BeforeEach
@@ -44,7 +55,12 @@ public class WebPageTest extends TestBase {
     }
 
     @Test
+    @Severity(SeverityLevel.CRITICAL)
+    @Owner("chilikinow")
+    @DisplayName("check positive registration form")
     void positiveRegistrationFormTest(){
+
+        SelenideLogger.addListener("allure", new AllureSelenide());
 
         registrationPage.openPage("/automation-practice-form")
             .setFirstName(student.getFirstName())
